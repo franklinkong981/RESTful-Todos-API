@@ -13,6 +13,11 @@ debug = DebugToolbarExtension(app)
 connect_db(app)
 app.app_context().push()
 
+@app.route('/')
+def index_page():
+    todos = Todo.query.all()
+    return render_template('index.html', todos=todos)
+
 @app.route('/api/todos')
 def list_todos():
     """Get all todos from database and respond listing them with JSON"""
